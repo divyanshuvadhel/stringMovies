@@ -1,19 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<link rel="stylesheet" href="./css/output.css">
-</head>
-<body>
-	<div class="w-full h-screen flex items-center justify-center bg-gray-100">
-		<div class="bg-white p-6 rounded-lg shadow-lg">
-			<h1 class="text-2xl font-bold mb-4">Welcome to StringMovies</h1>
-			<p class="text-gray-700">This is a modern modular website built with Tailwind CSS.</p>
-			<p class="mt-4 text-sm text-gray-500">Edit the files to see changes in real-time.</p>
-		</div	>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/output.css" />
+    <link
+      rel="shortcut icon"
+      href="../src/assets/icons/favicon.svg"
+      type="image/x-icon"
+    />
+    <script src="../src/js/compLoader.js " defer></script>
+  </head>
+  <body>
+    <!---------- Navigation comp------------->
+    <div id="nav-placeholder"></div>
 
-	</div>
-</body>
+    <!-- --------------- main content --------------- -->
+
+    <main>
+      <!-- --------------- hero section ----------------- -->
+      <section
+        class="text-white container mx-auto h-[850px] bg-red-400 overflow-hidden relative"
+      >
+        <!-- Image Background -->
+        <div
+          id="hero-background"
+          class="w-full h-full overflow-hidden absolute top-0 left-0 z-0"
+        >
+          <img
+            src="https://wallpapercat.com/w/middle-retina/e/5/1/37793-3840x2160-desktop-4k-the-dark-knight-wallpaper-photo.jpg"
+            alt=""
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <!-- --------------------- movie info----------------------- -->
+        <div
+          class="absolute top-[30%] left-0 w-full p-20 z-20 flex flex-col space-y-7"
+        >
+          <!-- -------------title ------------ -->
+          <div id="hero-movieTitle" class="font-bold text-white text-6xl">
+            <span>The Batman</span>
+          </div>
+
+          <!-- --------------- time--------------- -->
+
+          <div class="flex gap-2 text-lg">
+            <span>📆2022</span>
+            <span>⏳2h 34m</span>
+          </div>
+
+          <!-- ---------- context-------------- -->
+          <p class="text-slate-300 text-wrap w-1/2 text-lg">
+            When a sadistic serial killer begins murdering key political figures
+            in Gotham, the Batman is forced to investigate the city's hidden
+            corruption and question his family's involvement.
+          </p>
+
+          <!-- -------------- btns -------------- -->
+
+          <div class="flex flex-wrap gap-4">
+            <!-- Watch Trailer Button -->
+            <a
+              href="#"
+              class="px-6 py-2 text-lg font-semibold rounded-xl bg-amber-400 text-white shadow-md hover:bg-amber-500 hover:shadow-lg transition duration-300"
+            >
+              view Details
+            </a>
+
+            <!-- Add to Wishlist (Glass Effect) -->
+            <a
+              href="#"
+              class="px-6 py-2 text-lg font-semibold rounded-xl backdrop-blur-md bg-white/10 border border-white/30 text-white hover:bg-white/20 shadow-md transition duration-300"
+            >
+              ❤️ Add to Wishlist
+            </a>
+          </div>
+
+
+					<!-- Video Clips Carousel -->
+					<div class="w-full overflow-hidden">
+						<div class="flex gap-3 animate-scroll">
+							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
+								<img src="https://i.ytimg.com/vi/mqqft2x_Aa4/maxresdefault.jpg" alt="Clip 1" class="w-full h-full object-cover">
+							</div>
+							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
+								<img src="https://i.ytimg.com/vi/NLOp_6uPccQ/maxresdefault.jpg" alt="Clip 2" class="w-full h-full object-cover">
+							</div>
+							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
+								<img src="https://i.ytimg.com/vi/u34gHaRiBIU/maxresdefault.jpg" alt="Clip 3" class="w-full h-full object-cover">
+							</div>
+							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
+								<img src="https://i.ytimg.com/vi/HJv4LQxbVEA/maxresdefault.jpg" alt="Clip 4" class="w-full h-full object-cover">
+							</div>
+							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
+								<img src="https://i.ytimg.com/vi/6_AViDenqME/maxresdefault.jpg" alt="Clip 5" class="w-full h-full object-cover">
+							</div>
+							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
+								<img src="https://i.ytimg.com/vi/rsQEor4y2hg/maxresdefault.jpg" alt="Clip 6" class="w-full h-full object-cover">
+							</div>
+							<!-- Duplicate for seamless loop -->
+							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
+								<img src="https://i.ytimg.com/vi/mqqft2x_Aa4/maxresdefault.jpg" alt="Clip 1" class="w-full h-full object-cover">
+							</div>
+							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
+								<img src="https://i.ytimg.com/vi/NLOp_6uPccQ/maxresdefault.jpg" alt="Clip 2" class="w-full h-full object-cover">
+							</div>
+							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
+								<img src="https://i.ytimg.com/vi/u34gHaRiBIU/maxresdefault.jpg" alt="Clip 3" class="w-full h-full object-cover">
+							</div>
+						</div>
+					</div>
+
+        </div>
+        <!-- Gradient Overlay -->
+        <div class="w-full h-[60%] absolute bottom-0 z-10 pointer-events-none">
+          <div
+            class="w-full h-full blur-2xl bg-gradient-to-t from-black/80 via-black/70 to-transparent"
+          ></div>
+        </div>
+      </section>
+
+			<!-- -------------- movies section --------------- -->
+			<section class="container mx-auto px-10 py-5 ">
+				<!-- -------- fetured movies---------- -->
+				<div id="fetured-movies" class=" w-full flex gap-3 items-center">
+					<div id="fMovie1" class="bg-red-300 h-[300px] w-[200px] rounded-2xl">
+
+					</div>	
+				</div>
+			</section>
+
+    </main>
+
+    <!-- ------- Footer comp ------ -->
+    <div id="footer-placeholder"></div>
+    <!-- ------------ scripts--------------- -->
+  </body>
 </html>
