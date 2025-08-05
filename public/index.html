@@ -18,7 +18,7 @@
 
     <!-- --------------- main content --------------- -->
 
-    <main>
+    <main class="bg-black text-white">
       <!-- --------------- hero section ----------------- -->
       <section
         class="text-white container mx-auto h-[850px] bg-red-400 overflow-hidden relative"
@@ -123,12 +123,14 @@
       </section>
 
 			<!-- -------------- movies section --------------- -->
-			<section class="container mx-auto px-10 py-5 ">
+			<section class="container mx-auto "">
 				<!-- -------- fetured movies---------- -->
-				<div id="fetured-movies" class=" w-full flex gap-3 items-center">
-					<div id="fMovie1" class="bg-red-300 h-[300px] w-[200px] rounded-2xl">
-
-					</div>	
+				<div id="fetured-movies" class=" w-full space-y-5 gap-3 items-center p-5 ">
+					<div class="text-2xl font-bold ">Featured today</div>
+					<!-- -------------slider -------------- -->
+					<div id="fetured-carousel" class=" px-10 py-5 w-full  flex items-center gap-3 overflow-x-scroll">
+						
+					</div>
 				</div>
 			</section>
 
@@ -137,5 +139,6 @@
     <!-- ------- Footer comp ------ -->
     <div id="footer-placeholder"></div>
     <!-- ------------ scripts--------------- -->
+		 <script src="./js/index.js"></script>
   </body>
 </html>
