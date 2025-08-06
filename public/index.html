@@ -125,13 +125,57 @@
 			<!-- -------------- movies section --------------- -->
 			<section class="container mx-auto "">
 				<!-- -------- fetured movies---------- -->
-				<div id="fetured-movies" class=" w-full space-y-5 gap-3 items-center p-5 ">
+				<div id="fetured-movies" class=" w-full relative space-y-5  p-5  ">
 					<div class="text-2xl font-bold ">Featured today</div>
 					<!-- -------------slider -------------- -->
-					<div id="fetured-carousel" class=" px-10 py-5 w-full  flex items-center gap-3 overflow-x-scroll">
-						
+					<div id="fetured-carousel" class="px-10 py-5 w-full flex items-center gap-3 overflow-x-scroll no-scrollbar scroll-smooth">
+             
+           
 					</div>
+           <!-- Control Buttons -->
+             <button id="left" class="absolute top-[40%] left-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+            </button>
+             <button id="right" class="absolute top-[40%] right-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+             </button>
 				</div>
+
+        <!-- ---------------- top pics movies --------------------- -->
+        <div id="topPics-movies" class="w-full relative space-y-5 p-5 ">
+         	<div class="text-2xl font-bold ">Top Picks</div>
+          <!-- -------------slider---------- -->
+           <div id="top-picks-carousel" class="px-10 py-5 flex items-center gap-3 overflow-x-scroll no-scrollbar scroll-smooth">
+              
+           </div>
+            <button id="left" class="absolute top-[40%] left-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+            </button>
+             <button id="right" class="absolute top-[40%] right-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+             </button>
+        </div>     
+        
+        <!-- ------------------- fanfav--------------- -->
+        <div id="new-movies" class="w-full relative space-y-5 p-5 ">
+         	<div class="text-2xl font-bold ">new release</div>
+          <!-- -------------slider---------- -->
+           <div id="new-carousel" class="px-10 py-5 flex items-center gap-3 overflow-x-scroll no-scrollbar scroll-smooth">
+              
+           </div>
+            <button id="left" class="absolute top-[40%] left-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+            </button>
+             <button id="right" class="absolute top-[40%] right-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+             </button>
+        </div>    
 			</section>
 
     </main>
