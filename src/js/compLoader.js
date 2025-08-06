@@ -1,19 +1,29 @@
-// function loadComponent
+async function loadComponent(path, elementId) {
+  try {
+    const placeholder = document.getElementById(elementId);
+    if (!placeholder) {
+      console.log(`Element not found: ${elementId}`);
+      return;
+    }
 
- async function loadComponent(path,elementId){
-	try {
-		const placeholder = document.getElementById(elementId);
-		if(!placeholder) return console.log(`element not found ${elementId}`);
-
-		const html=await fetch(path).then((res)=>res.text()); 
-		if(!html) return console.log(`component not found at this path ${path}`)
-		
-		placeholder.innerHTML=html;
-		
-	} catch (error) {
-		console.log(`err at loadcoponent ${error}`);
-	}
+    const response = await fetch(path);
+    if (!response.ok) {
+      console.log(`Failed to load component: ${path}`);
+      return;
+    }
+    
+    const html = await response.text();
+    placeholder.innerHTML = html;
+    
+  } catch (error) {
+    console.log(`Error loading component: ${error}`);
+  }
 }
 
-	loadComponent('/src/components/nav.html','nav-placeholder');
-	loadComponent('/src/components/footer.html','footer-placeholder');
+// Load components when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  // Use relative paths that work in both dev and production
+  const basePath = window.location.pathname.includes('/public/') ? '../src/components/' : './src/components/';
+  loadComponent(`${basePath}nav.html`, 'nav-placeholder');
+  loadComponent(`${basePath}footer.html`, 'footer-placeholder');
+});

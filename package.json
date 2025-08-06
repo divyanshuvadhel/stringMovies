@@ -1,8 +1,22 @@
-{"scripts": {
-  "start": "tailwindcss -i ./src/css/input.css -o ./public/css/output.css --watch"
-},
+{
+  "name": "stringmovies",
+  "version": "1.0.0",
+  "description": "A modern movie discovery web application",
+  "scripts": {
+    "start": "tailwindcss -i ./src/css/input.css -o ./public/css/output.css --watch",
+    "build": "tailwindcss -i ./src/css/input.css -o ./public/css/output.css --minify",
+    "build:prod": "node build.js",
+    "dev": "npm run start",
+    "serve": "python -m http.server 8000 --directory public",
+    "serve-win": "cd public && python -m http.server 8000",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.11",
     "tailwindcss": "^4.1.11"
-  }
+  },
+  "devDependencies": {},
+  "keywords": ["movies", "tmdb", "javascript", "tailwindcss"],
+  "author": "Your Name",
+  "license": "MIT"
 }

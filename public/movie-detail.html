@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details - StringMovies</title>
+    <link rel="stylesheet" href="./css/output.css">
+    <link rel="shortcut icon" href="../src/assets/icons/favicon.svg" type="image/x-icon">
+    <script src="../src/js/compLoader.js" defer></script>
+</head>
+<body class="bg-black text-white">
+    <!-- Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Loading State -->
+    <div id="loading" class="flex justify-center items-center min-h-screen">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-400"></div>
+    </div>
+
+    <!-- Movie Detail Content -->
+    <div id="movie-content" class="hidden">
+        <!-- Hero Section -->
+        <div class="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
+            <div id="backdrop-container" class="absolute inset-0">
+                <!-- Backdrop image will be inserted here -->
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container mx-auto px-4 -mt-20 sm:-mt-24 lg:-mt-32 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+                <!-- Poster -->
+                <div class="flex-shrink-0 mx-auto lg:mx-0">
+                    <img id="movie-poster" class="w-48 h-72 sm:w-56 sm:h-84 lg:w-64 lg:h-96 object-cover rounded-lg shadow-2xl" alt="Movie Poster">
+                </div>
+
+                <!-- Movie Info -->
+                <div class="flex-1 space-y-4 lg:space-y-6 text-center lg:text-left">
+                    <!-- Title and Year -->
+                    <div>
+                        <h1 id="movie-title" class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2"></h1>
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-4 text-sm sm:text-base text-gray-300">
+                            <span id="movie-year"></span>
+                            <span id="movie-runtime"></span>
+                            <span id="movie-rating" class="bg-amber-400 text-black px-2 py-1 rounded font-semibold text-xs sm:text-sm"></span>
+                        </div>
+                    </div>
+
+                    <!-- Genres -->
+                    <div id="movie-genres" class="flex flex-wrap justify-center lg:justify-start gap-2"></div>
+
+                    <!-- Overview -->
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Overview</h3>
+                        <p id="movie-overview" class="text-gray-300 leading-relaxed text-sm sm:text-base"></p>
+                    </div>
+
+                    <!-- Director and Cast -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+                        <div>
+                            <h3 class="text-base sm:text-lg font-semibold mb-2">Director</h3>
+                            <p id="movie-director" class="text-gray-300 text-sm sm:text-base"></p>
+                        </div>
+                        <div>
+                            <h3 class="text-base sm:text-lg font-semibold mb-2">Top Cast</h3>
+                            <div id="movie-cast" class="text-gray-300 text-sm sm:text-base"></div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
+                        <button id="watch-trailer-btn" class="bg-amber-400 text-black px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-amber-500 transition text-sm sm:text-base">
+                            ▶ Watch Trailer
+                        </button>
+                        <button class="border border-gray-600 px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-gray-800 transition text-sm sm:text-base">
+                            + Add to Watchlist
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trailer Modal -->
+            <div id="trailer-modal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center">
+                <div class="relative w-full max-w-4xl mx-4">
+                    <button id="close-trailer" class="absolute -top-10 right-0 text-white text-2xl hover:text-amber-400">×</button>
+                    <div id="trailer-container" class="aspect-video bg-gray-900 rounded-lg overflow-hidden"></div>
+                </div>
+            </div>
+
+            <!-- Additional Sections -->
+            <div class="mt-12 space-y-12">
+                <!-- Cast Section -->
+                <section>
+                    <h2 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Cast & Crew</h2>
+                    <div id="cast-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-6"></div>
+                </section>
+
+                <!-- Reviews Section -->
+                <section>
+                    <h2 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Reviews</h2>
+                    <div id="review-section"></div>
+                </section>
+
+                <!-- Movie Sliders -->
+                <div id="recommendations-slider"></div>
+                <div id="similar-slider"></div>
+                <div id="popular-slider"></div>
+                <div id="upcoming-slider"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    
+    <script type="module">
+      import SearchHandler from '../src/js/search.js';
+      new SearchHandler();
+    </script>
+    <script type="module" src="./js/movie-detail.js"></script>
+</body>
+</html>

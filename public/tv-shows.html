@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Shows - StringMovies</title>
+    <link rel="stylesheet" href="./css/output.css">
+    <link rel="shortcut icon" href="../src/assets/icons/favicon.svg" type="image/x-icon">
+    <script src="../src/js/compLoader.js" defer></script>
+</head>
+<body class="bg-black text-white">
+    <div id="nav-placeholder"></div>
+    
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold mb-8">TV Shows</h1>
+        
+        <div id="popular-tv"></div>
+        <div id="toprated-tv"></div>
+        <div id="ontheair-tv"></div>
+    </main>
+    
+    <div id="footer-placeholder"></div>
+    <script type="module">
+      import SearchHandler from '../src/js/search.js';
+      new SearchHandler();
+    </script>
+    <script type="module" src="./js/tv-shows.js"></script>
+</body>
+</html>

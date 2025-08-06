@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Show Details - StringMovies</title>
+    <link rel="stylesheet" href="./css/output.css">
+    <link rel="shortcut icon" href="../src/assets/icons/favicon.svg" type="image/x-icon">
+    <script src="../src/js/compLoader.js" defer></script>
+</head>
+<body class="bg-black text-white">
+    <div id="nav-placeholder"></div>
+
+    <div id="loading" class="flex justify-center items-center min-h-screen">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-400"></div>
+    </div>
+
+    <div id="tv-content" class="hidden">
+        <div class="relative h-96 overflow-hidden">
+            <div id="backdrop-container" class="absolute inset-0"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+        </div>
+
+        <div class="container mx-auto px-4 -mt-32 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="flex-shrink-0">
+                    <img id="tv-poster" class="w-64 h-96 object-cover rounded-lg shadow-2xl" alt="TV Show Poster">
+                </div>
+
+                <div class="flex-1 space-y-6">
+                    <div>
+                        <h1 id="tv-title" class="text-4xl font-bold mb-2"></h1>
+                        <div class="flex items-center gap-4 text-gray-300">
+                            <span id="tv-year"></span>
+                            <span id="tv-seasons"></span>
+                            <span id="tv-rating" class="bg-amber-400 text-black px-2 py-1 rounded font-semibold"></span>
+                        </div>
+                    </div>
+
+                    <div id="tv-genres" class="flex flex-wrap gap-2"></div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Overview</h3>
+                        <p id="tv-overview" class="text-gray-300 leading-relaxed"></p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Creator</h3>
+                            <p id="tv-creator" class="text-gray-300"></p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2">Status</h3>
+                            <p id="tv-status" class="text-gray-300"></p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 pt-4">
+                        <button id="watch-trailer-btn" class="bg-amber-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-amber-500 transition">
+                            ▶ Watch Trailer
+                        </button>
+                        <button class="border border-gray-600 px-6 py-3 rounded-lg hover:bg-gray-800 transition">
+                            + Add to Watchlist
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="trailer-modal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center">
+                <div class="relative w-full max-w-4xl mx-4">
+                    <button id="close-trailer" class="absolute -top-10 right-0 text-white text-2xl hover:text-amber-400">×</button>
+                    <div id="trailer-container" class="aspect-video bg-gray-900 rounded-lg overflow-hidden"></div>
+                </div>
+            </div>
+
+            <div class="mt-12 space-y-12">
+                <section>
+                    <h2 class="text-2xl font-bold mb-6">Cast & Crew</h2>
+                    <div id="cast-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6"></div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold mb-6">Reviews</h2>
+                    <div id="review-section"></div>
+                </section>
+
+                <div id="similar-slider"></div>
+                <div id="popular-slider"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script type="module">
+      import SearchHandler from '../src/js/search.js';
+      new SearchHandler();
+    </script>
+    <script type="module" src="./js/tv-detail.js"></script>
+</body>
+</html>

@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>StringMovies - Discover Movies & TV Shows</title>
+    <meta name="description" content="Discover the latest movies and TV shows with StringMovies. Get detailed information, reviews, and recommendations.">
+    <meta name="keywords" content="movies, tv shows, cinema, entertainment, reviews, trailers">
+    <meta name="author" content="StringMovies">
+    <meta property="og:title" content="StringMovies - Discover Movies & TV Shows">
+    <meta property="og:description" content="Your ultimate destination for movie and TV show discovery">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="./css/output.css" />
     <link
       rel="shortcut icon"
@@ -22,12 +28,11 @@
       <!-- --------------- hero section ----------------- -->
       <section
         id="hero-section"
-        class="text-white container mx-auto h-[850px] bg-red-400 overflow-hidden relative"
+        class="text-white h-[60vh] sm:h-[70vh] lg:h-[850px] bg-black overflow-hidden relative"
       >
         <!-- Image Background -->
         <div
           id="hero-background"
-
           class="w-full h-full overflow-hidden absolute top-0 left-0 z-0"
         >
          
@@ -35,83 +40,45 @@
 
         <!-- --------------------- movie info----------------------- -->
         <div
-          class="absolute top-[30%] left-0 w-full p-20 z-20 flex flex-col space-y-7"
+          class="absolute top-[20%] sm:top-[25%] lg:top-[30%] left-0 w-full px-4 sm:px-8 lg:px-20 z-20 flex flex-col space-y-4 sm:space-y-6 lg:space-y-7"
         >
           <!-- -------------title ------------ -->
-          <div id="hero-movieTitle" class="font-bold text-white text-6xl">
+          <div id="hero-movieTitle" class="font-bold text-white text-2xl sm:text-4xl lg:text-6xl">
             <span>The Batman</span>
           </div>
 
           <!-- --------------- time--------------- -->
-
-          <div class="flex gap-2 text-lg">
+          <div class="flex gap-2 text-sm sm:text-base lg:text-lg">
             <span id="release"></span>
             <span id="time">⏳2h 34m</span>
           </div>
 
           <!-- ---------- context-------------- -->
-          <p class="text-slate-300 text-wrap w-1/2 text-lg" id="description">
+          <p class="text-slate-300 text-wrap w-full sm:w-3/4 lg:w-1/2 text-sm sm:text-base lg:text-lg" id="description">
             When a sadistic serial killer begins murdering key political figures
             in Gotham, the Batman is forced to investigate the city's hidden
             corruption and question his family's involvement.
           </p>
 
           <!-- -------------- btns -------------- -->
-
-          <div class="flex flex-wrap gap-4">
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <!-- Watch Trailer Button -->
             <a
               id="viewDetails"
               href="#"
-              class="px-6 py-2 text-lg font-semibold rounded-xl bg-amber-400 text-white shadow-md hover:bg-amber-500 hover:shadow-lg transition duration-300"
+              class="px-4 sm:px-6 py-2 text-sm sm:text-base lg:text-lg font-semibold rounded-xl bg-amber-400 text-black shadow-md hover:bg-amber-500 hover:shadow-lg transition duration-300 text-center"
             >
-              view Details
+              View Details
             </a>
 
             <!-- Add to Wishlist (Glass Effect) -->
             <a
               href="#"
-              class="px-6 py-2 text-lg font-semibold rounded-xl backdrop-blur-md bg-white/10 border border-white/30 text-white hover:bg-white/20 shadow-md transition duration-300"
+              class="px-4 sm:px-6 py-2 text-sm sm:text-base lg:text-lg font-semibold rounded-xl backdrop-blur-md bg-white/10 border border-white/30 text-white hover:bg-white/20 shadow-md transition duration-300 text-center"
             >
               ❤️ Add to Wishlist
             </a>
           </div>
-
-
-					<!-- Video Clips Carousel -->
-					<div class="w-full overflow-hidden">
-						<div class="flex gap-3 animate-scroll">
-							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
-								<img src="https://i.ytimg.com/vi/mqqft2x_Aa4/maxresdefault.jpg" alt="Clip 1" class="w-full h-full object-cover">
-							</div>
-							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
-								<img src="https://i.ytimg.com/vi/NLOp_6uPccQ/maxresdefault.jpg" alt="Clip 2" class="w-full h-full object-cover">
-							</div>
-							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
-								<img src="https://i.ytimg.com/vi/u34gHaRiBIU/maxresdefault.jpg" alt="Clip 3" class="w-full h-full object-cover">
-							</div>
-							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
-								<img src="https://i.ytimg.com/vi/HJv4LQxbVEA/maxresdefault.jpg" alt="Clip 4" class="w-full h-full object-cover">
-							</div>
-							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
-								<img src="https://i.ytimg.com/vi/6_AViDenqME/maxresdefault.jpg" alt="Clip 5" class="w-full h-full object-cover">
-							</div>
-							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
-								<img src="https://i.ytimg.com/vi/rsQEor4y2hg/maxresdefault.jpg" alt="Clip 6" class="w-full h-full object-cover">
-							</div>
-							<!-- Duplicate for seamless loop -->
-							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
-								<img src="https://i.ytimg.com/vi/mqqft2x_Aa4/maxresdefault.jpg" alt="Clip 1" class="w-full h-full object-cover">
-							</div>
-							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
-								<img src="https://i.ytimg.com/vi/NLOp_6uPccQ/maxresdefault.jpg" alt="Clip 2" class="w-full h-full object-cover">
-							</div>
-							<div class="flex-shrink-0 w-48 h-28 bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform">
-								<img src="https://i.ytimg.com/vi/u34gHaRiBIU/maxresdefault.jpg" alt="Clip 3" class="w-full h-full object-cover">
-							</div>
-						</div>
-					</div>
-
         </div>
         <!-- Gradient Overlay -->
         <div class="w-full h-[60%] absolute bottom-0 z-10 pointer-events-none">
@@ -122,57 +89,57 @@
       </section>
 
 			<!-- -------------- movies section --------------- -->
-			<section class="container mx-auto "">
-				<!-- -------- fetured movies---------- -->
-				<div id="fetured-movies" class=" w-full relative space-y-5  p-5  ">
-					<div class="text-2xl font-bold ">Featured today</div>
+			<section class="container mx-auto px-4">
+				<!-- -------- featured movies---------- -->
+				<div id="fetured-movies" class="w-full relative space-y-3 sm:space-y-5 py-4 sm:py-6">
+					<div class="text-xl sm:text-2xl font-bold px-2">Featured Today</div>
 					<!-- -------------slider -------------- -->
-					<div id="fetured-carousel" class="px-10 py-5 w-full flex items-center gap-3 overflow-x-scroll no-scrollbar scroll-smooth">
+					<div id="fetured-carousel" class="px-2 sm:px-4 lg:px-10 py-3 sm:py-5 w-full flex items-center gap-2 sm:gap-3 overflow-x-scroll no-scrollbar scroll-smooth">
              
            
 					</div>
            <!-- Control Buttons -->
-             <button id="left" class="absolute top-[40%] left-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+             <button id="featured-left" class="hidden lg:block absolute top-[40%] left-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-6 lg:py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="m15 18-6-6 6-6"/>
               </svg>
             </button>
-             <button id="right" class="absolute top-[40%] right-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+             <button id="featured-right" class="hidden lg:block absolute top-[40%] right-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-6 lg:py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
              </button>
 				</div>
 
         <!-- ---------------- top pics movies --------------------- -->
-        <div id="topPics-movies" class="w-full relative space-y-5 p-5 ">
-         	<div class="text-2xl font-bold ">Top Picks</div>
+        <div id="topPics-movies" class="w-full relative space-y-3 sm:space-y-5 py-4 sm:py-6">
+         	<div class="text-xl sm:text-2xl font-bold px-2">Top Picks</div>
           <!-- -------------slider---------- -->
-           <div id="top-picks-carousel" class="px-10 py-5 flex items-center gap-3 overflow-x-scroll no-scrollbar scroll-smooth">
+           <div id="top-picks-carousel" class="px-2 sm:px-4 lg:px-10 py-3 sm:py-5 flex items-center gap-2 sm:gap-3 overflow-x-scroll no-scrollbar scroll-smooth">
               
            </div>
-            <button id="left" class="absolute top-[40%] left-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button id="toppicks-left" class="hidden lg:block absolute top-[40%] left-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-6 lg:py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="m15 18-6-6 6-6"/>
               </svg>
             </button>
-             <button id="right" class="absolute top-[40%] right-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+             <button id="toppicks-right" class="hidden lg:block absolute top-[40%] right-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-6 lg:py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
              </button>
         </div>     
         
-        <!-- ------------------- fanfav--------------- -->
-        <div id="new-movies" class="w-full relative space-y-5 p-5 ">
-         	<div class="text-2xl font-bold ">new release</div>
+        <!-- ------------------- new releases--------------- -->
+        <div id="new-movies" class="w-full relative space-y-3 sm:space-y-5 py-4 sm:py-6">
+         	<div class="text-xl sm:text-2xl font-bold px-2">New Releases</div>
           <!-- -------------slider---------- -->
-           <div id="new-carousel" class="px-10 py-5 flex items-center gap-3 overflow-x-scroll no-scrollbar scroll-smooth">
+           <div id="new-carousel" class="px-2 sm:px-4 lg:px-10 py-3 sm:py-5 flex items-center gap-2 sm:gap-3 overflow-x-scroll no-scrollbar scroll-smooth">
               
            </div>
-            <button id="left" class="absolute top-[40%] left-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button id="new-left" class="hidden lg:block absolute top-[40%] left-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-6 lg:py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="m15 18-6-6 6-6"/>
               </svg>
             </button>
-             <button id="right" class="absolute top-[40%] right-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+             <button id="new-right" class="hidden lg:block absolute top-[40%] right-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg py-6 lg:py-10 px-2 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
              </button>
         </div>    
 			</section>
@@ -182,6 +149,10 @@
     <!-- ------- Footer comp ------ -->
     <div id="footer-placeholder"></div>
     <!-- ------------ scripts--------------- -->
+    <script type="module">
+      import SearchHandler from '../src/js/search.js';
+      new SearchHandler();
+    </script>
 		 <script type="module" src="./js/index.js"></script>
   </body>
 </html>

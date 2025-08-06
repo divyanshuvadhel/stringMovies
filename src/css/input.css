@@ -8,12 +8,15 @@
     transform: translateX(-1224px);
   }
 }
+
 .animate-scroll {
   animation: scroll 15s linear infinite;
 }
+
 .animate-scroll:hover {
   animation-play-state: paused;
 }
+
 /* Hide scrollbar for WebKit browsers (Chrome, Safari, Opera) */
 .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -23,4 +26,85 @@
 .no-scrollbar {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;     /* Firefox */
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Smooth transitions for movie cards */
+.movie-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Responsive design improvements */
+@media (max-width: 640px) {
+  .movie-card {
+    width: 140px;
+  }
+  
+  .hero-title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+  
+  .hero-content {
+    padding: 1rem;
+  }
+  
+  .carousel-container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .movie-card {
+    width: 160px;
+  }
+  
+  .hero-title {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .movie-card:hover {
+    transform: none;
+  }
+  
+  .movie-card:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Improved focus states for accessibility */
+.focus-visible:focus {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

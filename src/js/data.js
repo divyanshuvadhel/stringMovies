@@ -1,80 +1,134 @@
+import API_CONFIG from './config.js';
 
- async function getToprated(){
+// Generic API fetch function with enhanced error handling
+async function fetchFromAPI(endpoint, retries = 2) {
   const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTEwNmE5YWUzOTZhYWIyYTg1MTliOTE4YjNjZTU2YyIsIm5iZiI6MTcxMTQ1MTk5MC43MzcsInN1YiI6IjY2MDJhZjU2NDU5YWQ2MDE4N2ZjMDk2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kP5Gwqlw_4AQehKdmLjcKxNtEAvQTkyx6An9PMQBXa4'
-  }
-};
-
-  try {
-    const res=await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options);
-    if(res.ok){
-      return res.json();
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: API_CONFIG.API_KEY
     }
-  } catch (error) {
-      console.log(`err at fetching toprated movies tmdb ${error}`);
-  }
-}
+  };
 
-
-async function getTodayTop(){
-  const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTEwNmE5YWUzOTZhYWIyYTg1MTliOTE4YjNjZTU2YyIsIm5iZiI6MTcxMTQ1MTk5MC43MzcsInN1YiI6IjY2MDJhZjU2NDU5YWQ2MDE4N2ZjMDk2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kP5Gwqlw_4AQehKdmLjcKxNtEAvQTkyx6An9PMQBXa4'
-  }
-};
-try {
-  const res=await fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', options);
-  if(res.ok){
-    return res.json();
-  }   
-} catch (error) {
-console.log(`err at fetching toptoday movies tmdb ${error}`);
-}
-}
-
-async function getFeaturedMovies(){
-  const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTEwNmE5YWUzOTZhYWIyYTg1MTliOTE4YjNjZTU2YyIsIm5iZiI6MTcxMTQ1MTk5MC43MzcsInN1YiI6IjY2MDJhZjU2NDU5YWQ2MDE4N2ZjMDk2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kP5Gwqlw_4AQehKdmLjcKxNtEAvQTkyx6An9PMQBXa4'
-  }
-};
-try {
-  const res=await fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US', options);
-  if(res.ok){
-    return res.json();
-  }
-} catch (error) {
-console.log(`err at fetching featured movies tmdb ${error}`);
-}
-} 
-
-
-async function getNewRelease(){
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTEwNmE5YWUzOTZhYWIyYTg1MTliOTE4YjNjZTU2YyIsIm5iZiI6MTcxMTQ1MTk5MC43MzcsInN1YiI6IjY2MDJhZjU2NDU5YWQ2MDE4N2ZjMDk2NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kP5Gwqlw_4AQehKdmLjcKxNtEAvQTkyx6An9PMQBXa4'
-  }
-};
-
-  try {
-
-
-    const res=await fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options);
-    if(res.ok){
-      return res.json();
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const response = await fetch(`${API_CONFIG.BASE_URL}${endpoint}`, options);
+      
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('Invalid API key. Please check your TMDB API configuration.');
+        }
+        if (response.status === 429) {
+          throw new Error('API rate limit exceeded. Please try again later.');
+        }
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      if (attempt === retries) {
+        console.error(`API fetch error for ${endpoint} after ${retries + 1} attempts:`, error);
+        throw error;
+      }
+      // Wait before retry
+      await new Promise(resolve => setTimeout(resolve, 1000 * (attempt + 1)));
     }
-  } catch (error) {
-      console.log(`err at fetching toprated movies tmdb ${error}`);
   }
 }
 
-export {getToprated ,getTodayTop , getFeaturedMovies,getNewRelease};
+// Get top rated movies
+async function getToprated() {
+  return fetchFromAPI('/movie/top_rated?language=en-US&page=1');
+}
+
+// Get trending content for today
+async function getTodayTop() {
+  return fetchFromAPI('/trending/all/day?language=en-US');
+}
+
+// Get featured movies (trending movies)
+async function getFeaturedMovies() {
+  return fetchFromAPI('/trending/movie/day?language=en-US');
+}
+
+// Get new releases (now playing)
+async function getNewRelease() {
+  return fetchFromAPI('/movie/now_playing?language=en-US&page=1');
+}
+
+// Get movie details
+async function getMovieDetails(movieId) {
+  return fetchFromAPI(`/movie/${movieId}?language=en-US`);
+}
+
+// Get movie credits (cast and crew)
+async function getMovieCredits(movieId) {
+  return fetchFromAPI(`/movie/${movieId}/credits?language=en-US`);
+}
+
+// Get similar movies
+async function getSimilarMovies(movieId) {
+  return fetchFromAPI(`/movie/${movieId}/similar?language=en-US&page=1`);
+}
+
+// Get movie videos (trailers)
+async function getMovieVideos(movieId) {
+  return fetchFromAPI(`/movie/${movieId}/videos?language=en-US`);
+}
+
+// Get popular movies
+async function getPopularMovies() {
+  return fetchFromAPI('/movie/popular?language=en-US&page=1');
+}
+
+// Get upcoming movies
+async function getUpcomingMovies() {
+  return fetchFromAPI('/movie/upcoming?language=en-US&page=1');
+}
+
+// Get movie recommendations
+async function getMovieRecommendations(movieId) {
+  return fetchFromAPI(`/movie/${movieId}/recommendations?language=en-US&page=1`);
+}
+
+// Search movies
+async function searchMovies(query) {
+  return fetchFromAPI(`/search/movie?query=${encodeURIComponent(query)}&language=en-US&page=1`);
+}
+
+// Get TV shows
+async function getPopularTVShows() {
+  return fetchFromAPI('/tv/popular?language=en-US&page=1');
+}
+
+async function getTopRatedTVShows() {
+  return fetchFromAPI('/tv/top_rated?language=en-US&page=1');
+}
+
+async function getOnTheAirTVShows() {
+  return fetchFromAPI('/tv/on_the_air?language=en-US&page=1');
+}
+
+// Get trending week
+async function getTrendingWeek() {
+  return fetchFromAPI('/trending/movie/week?language=en-US');
+}
+
+// TV Show APIs
+async function getTVDetails(tvId) {
+  return fetchFromAPI(`/tv/${tvId}?language=en-US`);
+}
+
+async function getTVCredits(tvId) {
+  return fetchFromAPI(`/tv/${tvId}/credits?language=en-US`);
+}
+
+async function getSimilarTVShows(tvId) {
+  return fetchFromAPI(`/tv/${tvId}/similar?language=en-US&page=1`);
+}
+
+async function getTVVideos(tvId) {
+  return fetchFromAPI(`/tv/${tvId}/videos?language=en-US`);
+}
+
+export { getToprated, getTodayTop, getFeaturedMovies, getNewRelease, getMovieDetails, getMovieCredits, getSimilarMovies, getMovieVideos, getPopularMovies, getUpcomingMovies, getMovieRecommendations, searchMovies, getPopularTVShows, getTopRatedTVShows, getOnTheAirTVShows, getTrendingWeek, getTVDetails, getTVCredits, getSimilarTVShows, getTVVideos };
