@@ -21,18 +21,16 @@
     <main class="bg-black text-white">
       <!-- --------------- hero section ----------------- -->
       <section
+        id="hero-section"
         class="text-white container mx-auto h-[850px] bg-red-400 overflow-hidden relative"
       >
         <!-- Image Background -->
         <div
           id="hero-background"
+
           class="w-full h-full overflow-hidden absolute top-0 left-0 z-0"
         >
-          <img
-            src="https://wallpapercat.com/w/middle-retina/e/5/1/37793-3840x2160-desktop-4k-the-dark-knight-wallpaper-photo.jpg"
-            alt=""
-            class="w-full h-full object-cover"
-          />
+         
         </div>
 
         <!-- --------------------- movie info----------------------- -->
@@ -47,12 +45,12 @@
           <!-- --------------- time--------------- -->
 
           <div class="flex gap-2 text-lg">
-            <span>📆2022</span>
-            <span>⏳2h 34m</span>
+            <span id="release"></span>
+            <span id="time">⏳2h 34m</span>
           </div>
 
           <!-- ---------- context-------------- -->
-          <p class="text-slate-300 text-wrap w-1/2 text-lg">
+          <p class="text-slate-300 text-wrap w-1/2 text-lg" id="description">
             When a sadistic serial killer begins murdering key political figures
             in Gotham, the Batman is forced to investigate the city's hidden
             corruption and question his family's involvement.
@@ -63,6 +61,7 @@
           <div class="flex flex-wrap gap-4">
             <!-- Watch Trailer Button -->
             <a
+              id="viewDetails"
               href="#"
               class="px-6 py-2 text-lg font-semibold rounded-xl bg-amber-400 text-white shadow-md hover:bg-amber-500 hover:shadow-lg transition duration-300"
             >
@@ -183,6 +182,6 @@
     <!-- ------- Footer comp ------ -->
     <div id="footer-placeholder"></div>
     <!-- ------------ scripts--------------- -->
-		 <script src="./js/index.js"></script>
+		 <script type="module" src="./js/index.js"></script>
   </body>
 </html>
