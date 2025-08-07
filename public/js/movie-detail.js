@@ -201,8 +201,11 @@ window.submitReview = async function(id, type) {
   };
   
   try {
+    console.log('Importing Firebase...');
     const { addReview } = await import('../../src/js/firebase.js');
+    console.log('Submitting review with data:', { id, type, reviewData });
     const success = await addReview(id, type, reviewData);
+    console.log('Review submission result:', success);
     
     if (success) {
       document.getElementById('reviewer-name').value = '';
@@ -215,7 +218,7 @@ window.submitReview = async function(id, type) {
     }
   } catch (error) {
     console.error('Review submission error:', error);
-    alert('Failed to submit review. Please check your connection.');
+    alert('Failed to submit review. Error: ' + error.message);
   }
   
   submitBtn.textContent = 'Submit Review';

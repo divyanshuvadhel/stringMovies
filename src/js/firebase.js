@@ -1,5 +1,5 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, query, orderBy, where } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, where } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -17,43 +17,33 @@ const db = getFirestore(app);
 
 export async function addReview(contentId, contentType, reviewData) {
   try {
-    // Validate input data
-    if (!contentId || !contentType || !reviewData) {
-      throw new Error('Missing required review data');
-    }
-    
+    console.log('Adding review:', { contentId, contentType, reviewData });
     await addDoc(collection(db, 'reviews'), {
       contentId: String(contentId),
       contentType: String(contentType),
       ...reviewData,
       timestamp: new Date()
     });
-    return { success: true };
+    console.log('Review added successfully');
+    return true;
   } catch (error) {
     console.error('Error adding review:', error);
-    return { success: false, error: error.message };
+    return false;
   }
 }
 
 export async function getReviews(contentId, contentType) {
   try {
-    // Validate input
-    if (!contentId || !contentType) {
-      throw new Error('Missing contentId or contentType');
-    }
-    
-    // Optimized query with server-side filtering
-    const q = query(
-      collection(db, 'reviews'),
-      where('contentId', '==', String(contentId)),
-      where('contentType', '==', String(contentType)),
-      orderBy('timestamp', 'desc')
-    );
-    
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log('Fetching reviews for:', { contentId, contentType });
+    const querySnapshot = await getDocs(collection(db, 'reviews'));
+    const reviews = querySnapshot.docs
+      .map(doc => ({ id: doc.id, ...doc.data() }))
+      .filter(review => review.contentId === String(contentId) && review.contentType === String(contentType))
+      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    console.log('Reviews fetched:', reviews);
+    return reviews;
   } catch (error) {
     console.error('Error fetching reviews:', error);
-    return { error: error.message, reviews: [] };
+    return [];
   }
 }
