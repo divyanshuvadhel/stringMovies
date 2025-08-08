@@ -4,8 +4,8 @@
   "description": "A modern movie discovery web application",
   "main": "public/index.html",
   "scripts": {
-    "start": "npx tailwindcss -i ./src/css/input.css -o ./public/css/output.css --watch",
-    "build": "npx tailwindcss -i ./src/css/input.css -o ./public/css/output.css --minify",
+    "start": "npx tailwindcss -i ./public/src/css/input.css -o ./public/css/output.css --watch",
+    "build": "npx tailwindcss -i ./public/src/css/input.css -o ./public/css/output.css --minify",
     "dev": "npx live-server public"
   },
   "keywords": [
