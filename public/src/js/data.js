@@ -1,57 +1,23 @@
 import API_CONFIG from './config.js';
 
-// Generic API fetch function with enhanced error handling
-async function fetchFromAPI(endpoint, retries = 3) {
-  const options = {
-    method: 'GET',
-    headers: {
-      'accept': 'application/json',
-      'Authorization': API_CONFIG.API_KEY,
-      'Content-Type': 'application/json'
-    },
-    mode: 'cors',
-    cache: 'default'
-  };
-
-  for (let attempt = 0; attempt <= retries; attempt++) {
-    try {
-      console.log(`Fetching: ${API_CONFIG.BASE_URL}${endpoint}`);
-      
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
-      
-      const response = await fetch(`${API_CONFIG.BASE_URL}${endpoint}`, {
-        ...options,
-        signal: controller.signal
-      });
-      
-      clearTimeout(timeoutId);
-      
-      if (!response.ok) {
-        if (response.status === 401) {
-          throw new Error('Invalid API key');
-        }
-        if (response.status === 429) {
-          throw new Error('Rate limit exceeded');
-        }
-        throw new Error(`HTTP ${response.status}`);
+// Simplified API fetch function
+async function fetchFromAPI(endpoint) {
+  try {
+    const response = await fetch(`${API_CONFIG.BASE_URL}${endpoint}`, {
+      method: 'GET',
+      headers: {
+        'accept': 'application/json',
+        'Authorization': API_CONFIG.API_KEY
       }
-      
-      const data = await response.json();
-      console.log(`Success: ${endpoint}`, data);
-      return data;
-      
-    } catch (error) {
-      console.error(`Attempt ${attempt + 1} failed for ${endpoint}:`, error.message);
-      
-      if (attempt === retries) {
-        console.error(`Final failure for ${endpoint}:`, error);
-        throw new Error(`Failed to fetch data: ${error.message}`);
-      }
-      
-      // Progressive backoff
-      await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, attempt)));
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
     }
+    
+    return await response.json();
+  } catch (error) {
+    throw error;
   }
 }
 

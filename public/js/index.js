@@ -21,8 +21,6 @@ function showError(containerId, message) {
 // Initialize app
 async function initializeApp() {
   try {
-    console.log('Initializing app...');
-    
     // Show loading states
     showHeroLoading();
     showLoading('fetured-carousel');
@@ -34,25 +32,28 @@ async function initializeApp() {
       throw new Error('No internet connection');
     }
 
-    // Fetch data with individual error handling
-    let toprated, topToday, featuredMovies, newReleases;
+    // Fetch data sequentially to avoid loading issues
+    let toprated, featuredMovies, newReleases;
     
     try {
-      [toprated, topToday, featuredMovies, newReleases] = await Promise.all([
-        getToprated().catch(e => { console.error('Toprated failed:', e); return null; }),
-        getTodayTop().catch(e => { console.error('TodayTop failed:', e); return null; }),
-        getFeaturedMovies().catch(e => { console.error('Featured failed:', e); return null; }),
-        getNewRelease().catch(e => { console.error('NewRelease failed:', e); return null; })
-      ]);
-    } catch (error) {
-      console.error('Promise.all failed:', error);
-      // Fallback: try one by one
-      featuredMovies = await getFeaturedMovies().catch(() => null);
-      toprated = await getToprated().catch(() => null);
-      newReleases = await getNewRelease().catch(() => null);
+      featuredMovies = await getFeaturedMovies();
+    } catch (e) {
+      featuredMovies = null;
+    }
+    
+    try {
+      toprated = await getToprated();
+    } catch (e) {
+      toprated = null;
+    }
+    
+    try {
+      newReleases = await getNewRelease();
+    } catch (e) {
+      newReleases = null;
     }
 
-    console.log('Data fetched:', { toprated: !!toprated, featuredMovies: !!featuredMovies, newReleases: !!newReleases });
+
 
     // Initialize hero section
     if (featuredMovies?.results?.[0]) {
@@ -84,7 +85,6 @@ async function initializeApp() {
     }
     
   } catch (error) {
-    console.error('Failed to initialize app:', error);
     showError('fetured-carousel', error.message || 'Failed to load content');
     showError('top-picks-carousel', error.message || 'Failed to load content');
     showError('new-carousel', error.message || 'Failed to load content');
@@ -179,4 +179,15 @@ function initializeCarouselControls() {
 }
 
 // Initialize the app when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeApp);
+document.addEventListener('DOMContentLoaded', () => {
+  // Set a maximum timeout for initialization
+  const initTimeout = setTimeout(() => {
+    showError('fetured-carousel', 'Loading timeout - please refresh');
+    showError('top-picks-carousel', 'Loading timeout - please refresh');
+    showError('new-carousel', 'Loading timeout - please refresh');
+  }, 15000); // 15 second timeout
+  
+  initializeApp().finally(() => {
+    clearTimeout(initTimeout);
+  });
+});
