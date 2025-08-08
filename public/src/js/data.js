@@ -1,37 +1,56 @@
 import API_CONFIG from './config.js';
 
 // Generic API fetch function with enhanced error handling
-async function fetchFromAPI(endpoint, retries = 2) {
+async function fetchFromAPI(endpoint, retries = 3) {
   const options = {
     method: 'GET',
     headers: {
-      accept: 'application/json',
-      Authorization: API_CONFIG.API_KEY
-    }
+      'accept': 'application/json',
+      'Authorization': API_CONFIG.API_KEY,
+      'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    cache: 'default'
   };
 
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      const response = await fetch(`${API_CONFIG.BASE_URL}${endpoint}`, options);
+      console.log(`Fetching: ${API_CONFIG.BASE_URL}${endpoint}`);
+      
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+      
+      const response = await fetch(`${API_CONFIG.BASE_URL}${endpoint}`, {
+        ...options,
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeoutId);
       
       if (!response.ok) {
         if (response.status === 401) {
-          throw new Error('Invalid API key. Please check your TMDB API configuration.');
+          throw new Error('Invalid API key');
         }
         if (response.status === 429) {
-          throw new Error('API rate limit exceeded. Please try again later.');
+          throw new Error('Rate limit exceeded');
         }
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP ${response.status}`);
       }
       
-      return await response.json();
+      const data = await response.json();
+      console.log(`Success: ${endpoint}`, data);
+      return data;
+      
     } catch (error) {
+      console.error(`Attempt ${attempt + 1} failed for ${endpoint}:`, error.message);
+      
       if (attempt === retries) {
-        console.error(`API fetch error for ${endpoint} after ${retries + 1} attempts:`, error);
-        throw error;
+        console.error(`Final failure for ${endpoint}:`, error);
+        throw new Error(`Failed to fetch data: ${error.message}`);
       }
-      // Wait before retry
-      await new Promise(resolve => setTimeout(resolve, 1000 * (attempt + 1)));
+      
+      // Progressive backoff
+      await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, attempt)));
     }
   }
 }

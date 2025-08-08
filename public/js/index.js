@@ -21,38 +21,73 @@ function showError(containerId, message) {
 // Initialize app
 async function initializeApp() {
   try {
+    console.log('Initializing app...');
+    
     // Show loading states
     showHeroLoading();
     showLoading('fetured-carousel');
     showLoading('top-picks-carousel');
     showLoading('new-carousel');
 
-    // Fetch data concurrently
-    const [toprated, topToday, featuredMovies, newReleases] = await Promise.all([
-      getToprated(),
-      getTodayTop(),
-      getFeaturedMovies(),
-      getNewRelease()
-    ]);
+    // Test network connectivity
+    if (!navigator.onLine) {
+      throw new Error('No internet connection');
+    }
 
-    // Initialize hero section with time evey 10sec
-    initializeHero(featuredMovies?.results?.[0]);
+    // Fetch data with individual error handling
+    let toprated, topToday, featuredMovies, newReleases;
     
-    setInterval(() => {
-      initializeHero(featuredMovies?.results?.[Math.floor(Math.random() * 10)]);
-    }, 10000);
+    try {
+      [toprated, topToday, featuredMovies, newReleases] = await Promise.all([
+        getToprated().catch(e => { console.error('Toprated failed:', e); return null; }),
+        getTodayTop().catch(e => { console.error('TodayTop failed:', e); return null; }),
+        getFeaturedMovies().catch(e => { console.error('Featured failed:', e); return null; }),
+        getNewRelease().catch(e => { console.error('NewRelease failed:', e); return null; })
+      ]);
+    } catch (error) {
+      console.error('Promise.all failed:', error);
+      // Fallback: try one by one
+      featuredMovies = await getFeaturedMovies().catch(() => null);
+      toprated = await getToprated().catch(() => null);
+      newReleases = await getNewRelease().catch(() => null);
+    }
 
+    console.log('Data fetched:', { toprated: !!toprated, featuredMovies: !!featuredMovies, newReleases: !!newReleases });
+
+    // Initialize hero section
+    if (featuredMovies?.results?.[0]) {
+      initializeHero(featuredMovies.results[0]);
+      
+      setInterval(() => {
+        const randomIndex = Math.floor(Math.random() * Math.min(10, featuredMovies.results.length));
+        initializeHero(featuredMovies.results[randomIndex]);
+      }, 10000);
+    }
+
+    // Setup movie sliders with fallback
+    if (featuredMovies?.results) {
+      new MovieSlider('fetured-movies', 'Featured Today', featuredMovies.results);
+    } else {
+      showError('fetured-carousel', 'Unable to load featured movies');
+    }
     
-    // Setup movie sliders
-    new MovieSlider('fetured-movies', 'Featured Today', featuredMovies?.results);
-    new MovieSlider('topPics-movies', 'Top Picks', toprated?.results);
-    new MovieSlider('new-movies', 'New Release', newReleases?.results);
+    if (toprated?.results) {
+      new MovieSlider('topPics-movies', 'Top Picks', toprated.results);
+    } else {
+      showError('top-picks-carousel', 'Unable to load top picks');
+    }
+    
+    if (newReleases?.results) {
+      new MovieSlider('new-movies', 'New Release', newReleases.results);
+    } else {
+      showError('new-carousel', 'Unable to load new releases');
+    }
     
   } catch (error) {
     console.error('Failed to initialize app:', error);
-    ErrorHandler.showAPIError('fetured-carousel');
-    ErrorHandler.showAPIError('top-picks-carousel');
-    ErrorHandler.showAPIError('new-carousel');
+    showError('fetured-carousel', error.message || 'Failed to load content');
+    showError('top-picks-carousel', error.message || 'Failed to load content');
+    showError('new-carousel', error.message || 'Failed to load content');
   }
 }
 
