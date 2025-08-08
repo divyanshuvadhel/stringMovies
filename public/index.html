@@ -149,6 +149,18 @@
     <!-- ------- Footer comp ------ -->
     <div id="footer-placeholder"></div>
     <!-- ------------ scripts--------------- -->
+    <script>
+      // Mobile menu fix
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+          const btn = document.getElementById('mobile-menu-btn');
+          const menu = document.getElementById('mobile-menu');
+          if (btn && menu) {
+            btn.onclick = () => menu.classList.toggle('hidden');
+          }
+        }, 100);
+      });
+    </script>
     <script type="module">
       import SearchHandler from './src/js/search.js';
       new SearchHandler();

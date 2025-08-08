@@ -15,8 +15,42 @@ async function loadComponent(path, elementId) {
     const html = await response.text();
     placeholder.innerHTML = html;
     
+    // Initialize mobile menu after nav component is loaded
+    if (elementId === 'nav-placeholder') {
+      setTimeout(initializeMobileMenu, 0);
+    }
+    
   } catch (error) {
     console.log(`Error loading component: ${error}`);
+  }
+}
+
+// Mobile menu initialization
+function initializeMobileMenu() {
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  if (mobileMenuBtn && mobileMenu) {
+    // Toggle menu on button click
+    mobileMenuBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Close menu when clicking on links
+    const menuLinks = mobileMenu.querySelectorAll('a');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
   }
 }
 
