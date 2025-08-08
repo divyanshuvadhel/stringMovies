@@ -22,8 +22,8 @@ async function loadComponent(path, elementId) {
 
 // Load components when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  // Use relative paths that work in both dev and production
-  const basePath = window.location.pathname.includes('/public/') ? '../src/components/' : './src/components/';
+  // Use relative paths for Firebase hosting
+  const basePath = './src/components/';
   loadComponent(`${basePath}nav.html`, 'nav-placeholder');
   loadComponent(`${basePath}footer.html`, 'footer-placeholder');
 });

@@ -1,5 +1,5 @@
-import { getPopularMovies, getToprated, getUpcomingMovies, getNewRelease } from "../../src/js/data.js";
-import MovieSlider from "../../src/js/movieSlider.js";
+import { getPopularMovies, getToprated, getUpcomingMovies, getNewRelease } from "../src/js/data.js";
+import MovieSlider from "../src/js/movieSlider.js";
 
 async function loadMoviesPage() {
   try {

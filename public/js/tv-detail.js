@@ -1,5 +1,5 @@
-import { getTVDetails, getTVCredits, getSimilarTVShows, getTVVideos, getPopularTVShows } from "../../src/js/data.js";
-import MovieSlider from "../../src/js/movieSlider.js";
+import { getTVDetails, getTVCredits, getSimilarTVShows, getTVVideos, getPopularTVShows } from "../src/js/data.js";
+import MovieSlider from "../src/js/movieSlider.js";
 
 function getTVIdFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -192,7 +192,7 @@ window.submitReview = async function(id, type) {
   };
   
   try {
-    const { addReview } = await import('../../src/js/firebase.js');
+    const { addReview } = await import('../src/js/firebase.js');
     const success = await addReview(id, type, reviewData);
     
     if (success) {
@@ -217,7 +217,7 @@ async function loadReviews(id, type) {
   const reviewsList = document.getElementById('reviews-list');
   reviewsList.innerHTML = '<div class="text-center py-4">Loading reviews...</div>';
   
-  const { getReviews } = await import('../../src/js/firebase.js');
+  const { getReviews } = await import('../src/js/firebase.js');
   const reviews = await getReviews(id, type);
   
   if (reviews.length === 0) {

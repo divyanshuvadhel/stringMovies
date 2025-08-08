@@ -1,5 +1,5 @@
-import { getPopularTVShows, getTopRatedTVShows, getOnTheAirTVShows } from "../../src/js/data.js";
-import MovieSlider from "../../src/js/movieSlider.js";
+import { getPopularTVShows, getTopRatedTVShows, getOnTheAirTVShows } from "../src/js/data.js";
+import MovieSlider from "../src/js/movieSlider.js";
 
 async function loadTVShowsPage() {
   try {

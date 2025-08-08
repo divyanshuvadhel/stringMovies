@@ -1,5 +1,5 @@
-import { getTodayTop, getTrendingWeek } from "../../src/js/data.js";
-import MovieSlider from "../../src/js/movieSlider.js";
+import { getTodayTop, getTrendingWeek } from "../src/js/data.js";
+import MovieSlider from "../src/js/movieSlider.js";
 
 async function loadTrendingPage() {
   try {

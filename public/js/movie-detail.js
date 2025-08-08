@@ -1,5 +1,5 @@
-import { getMovieDetails, getMovieCredits, getSimilarMovies, getMovieVideos, getPopularMovies, getUpcomingMovies, getMovieRecommendations } from "../../src/js/data.js";
-import MovieSlider from "../../src/js/movieSlider.js";
+import { getMovieDetails, getMovieCredits, getSimilarMovies, getMovieVideos, getPopularMovies, getUpcomingMovies, getMovieRecommendations } from "../src/js/data.js";
+import MovieSlider from "../src/js/movieSlider.js";
 
 // Get movie ID from URL parameters
 function getMovieIdFromURL() {
@@ -202,7 +202,7 @@ window.submitReview = async function(id, type) {
   
   try {
     console.log('Importing Firebase...');
-    const { addReview } = await import('../../src/js/firebase.js');
+    const { addReview } = await import('../src/js/firebase.js');
     console.log('Submitting review with data:', { id, type, reviewData });
     const success = await addReview(id, type, reviewData);
     console.log('Review submission result:', success);
@@ -229,7 +229,7 @@ async function loadReviews(id, type) {
   const reviewsList = document.getElementById('reviews-list');
   reviewsList.innerHTML = '<div class="text-center py-4">Loading reviews...</div>';
   
-  const { getReviews } = await import('../../src/js/firebase.js');
+  const { getReviews } = await import('../src/js/firebase.js');
   const reviews = await getReviews(id, type);
   
   if (reviews.length === 0) {

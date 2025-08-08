@@ -1,6 +1,6 @@
-import { getToprated, getTodayTop, getFeaturedMovies, getNewRelease } from "../../src/js/data.js";
-import MovieSlider from "../../src/js/movieSlider.js";
-import ErrorHandler from "../../src/js/errorHandler.js";
+import { getToprated, getTodayTop, getFeaturedMovies, getNewRelease } from "../src/js/data.js";
+import MovieSlider from "../src/js/movieSlider.js";
+import ErrorHandler from "../src/js/errorHandler.js";
 
 // Loading state Management
 function showLoading(containerId) {
